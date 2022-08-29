@@ -46,7 +46,7 @@ class EventScheduleSeeder extends Seeder
                 'start_dt' => Carbon::now(),
                 'end_dt' => Carbon::now()
             ],
-            4 => [
+            5 => [
                 'id' => 6,
                 'event_id' => 6,
                 'start_dt' => Carbon::now(),
