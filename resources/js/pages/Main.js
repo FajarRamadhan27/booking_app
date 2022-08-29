@@ -1,41 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import MovieCard from '../components/cards/MovieCard';
+import Container from './Container';
+import { CssBaseline } from '@mui/material';
+import CustomAppBar from '../components/CustomAppBar';
+import { Provider } from 'react-redux';
+import Store from '../utils/redux/Store';
 
 function Main() {
     return (
-        <container className='flex justify-center'>
-            <div className='border h-4/6 w-2/3 my-10 p-5'>
-                <Typography variant='h5' align='center'>Choose your movie and book the seat now</Typography>
-                <Grid container marginTop={5}>
-                    <Grid xs={4} padding={2}>
-                        <MovieCard/>
-                    </Grid>
-                    <Grid xs={4} padding={2}>
-                        <MovieCard/>
-                    </Grid>
-                    <Grid xs={4} padding={2}>
-                        <MovieCard/>
-                    </Grid>
-                    <Grid xs={4} padding={2}>
-                        <MovieCard/>
-                    </Grid>
-                    <Grid xs={4} padding={2}>
-                        <MovieCard/>
-                    </Grid>
-                    <Grid xs={4} padding={2}>
-                        <MovieCard/>
-                    </Grid>
-                </Grid>
-            </div>
-        </container>
+        <React.Fragment>
+            <CssBaseline/>
+            <CustomAppBar/>
+            <Container/>
+        </React.Fragment>
     );
 }
 
 export default Main;
 
 if (document.getElementById('app')) {
-    ReactDOM.render(<Main />, document.getElementById('app'));
+    ReactDOM.render(
+        <React.StrictMode>
+            <Provider store={Store}>
+                <Main />
+            </Provider>
+        </React.StrictMode>
+        , document.getElementById('app')
+    );
 }
