@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import { Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
 import { setBookingDialogOpenOrClose } from '../../utils/redux/reducers/UiAttributeSlice';
+import { setSelectedEventSchedule } from '../../utils/redux/reducers/EventScheduleSlice';
 
 function MovieCard(props) {
 
@@ -9,7 +10,12 @@ function MovieCard(props) {
     const dispatch = useDispatch()
 
     return (
-        <Card onClick={() => dispatch(setBookingDialogOpenOrClose(true))}>
+        <Card
+            onClick={() => {
+                dispatch(setBookingDialogOpenOrClose(true))
+                dispatch(setSelectedEventSchedule(cardData))
+            }}
+        >
             <CardActionArea>
                 <CardMedia
                     component="img"

@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect} from "react"
+import Loading from "../components/Loading"
 import { Grid, Typography } from "@mui/material"
 import MovieCard from "../components/cards/MovieCard"
-import BookingDialogs from "../components/dialogs/BookingDialog"
+import { useDispatch, useSelector } from "react-redux"
 import { getEventSchedules } from "../utils/network/lib/Event"
+import BookingDialogs from "../components/dialogs/BookingDialog"
 import { setEvenSchedulesData } from "../utils/redux/reducers/EventScheduleSlice"
-import Loading from "../components/Loading"
 
 function Container() {
 
@@ -22,7 +22,7 @@ function Container() {
         })
     }, [])
 
-    if(!originalData) return <Loading oepn={originalData==null}/>
+    if(!originalData) return <Loading open={originalData==null}/>
 
     return (
         <container className='flex justify-center'>
