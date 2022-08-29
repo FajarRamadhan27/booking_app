@@ -1,29 +1,28 @@
+import { useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
+import { setBookingDialogOpenOrClose } from '../../utils/redux/reducers/UiAttributeSlice';
 
-function MovieCard() {
+function MovieCard(props) {
+
+    const { cardData } = props
+    const dispatch = useDispatch()
+
     return (
-        <Card>
+        <Card onClick={() => dispatch(setBookingDialogOpenOrClose(true))}>
             <CardActionArea>
                 <CardMedia
                     component="img"
                     height="140"
-                    image="/images/poster/infinity-war.jpg"
-                    alt="green iguana"
+                    image={cardData.images}
+                    alt={cardData.images}
                 />
-                <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
-                </Typography>
+                <CardContent sx={{ padding: 1 }}>
+                    <Typography variant="h6" component="div" >
+                        { cardData.title }
+                    </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">Book</Button>
-            </CardActions>
         </Card>
     )
 }
