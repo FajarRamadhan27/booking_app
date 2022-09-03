@@ -2,17 +2,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { useSelector } from 'react-redux';
-import { useTheme } from '@mui/material/styles';
 import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 
 function BookingCard() {
-  const theme = useTheme();
+
   const { selectedEventSchedule } = useSelector((state) => state.eventSchedules)
 
   return (
@@ -25,12 +20,21 @@ function BookingCard() {
        />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            {selectedEventSchedule.title}
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-          {selectedEventSchedule.description}
-          </Typography>
+          <div className='flex flex-col justify-between'>
+            <div className='mb-6'>
+              <Typography component="div" variant="h5">
+                {selectedEventSchedule.title}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" component="div">
+                {selectedEventSchedule.description}
+              </Typography>
+            </div>
+            <div className='bg-blue-500 p-1 rounded-md'>
+              <Typography color={'white'} component="div" variant="body1">
+                2022-08-31 14:15 AM
+              </Typography>
+            </div>
+          </div>
         </CardContent>
       </Box>
     </Card>

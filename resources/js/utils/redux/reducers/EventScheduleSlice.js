@@ -5,7 +5,7 @@ export const eventSchedulesSlice = createSlice({
     initialState: {
         originalData: null,
         filterableData: null,
-        selectedEventSchedule: null,
+        selectedEventSchedule: null
     },
     reducers: {
         setEvenSchedulesData: (state, value) => {

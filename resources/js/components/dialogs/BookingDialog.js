@@ -1,20 +1,22 @@
 import * as React from 'react';
-import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
+import { Divider} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import ChooseSeat from '../forms/ChooseSeat';
 import { styled } from '@mui/material/styles';
 import BookingCard from '../cards/BookingCard';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { CardMedia, Divider, Typography } from '@mui/material';
 import DialogTitle from '@mui/material/DialogTitle';
-import SquareIcon from '@mui/icons-material/Square';
+import FillInformatin from '../forms/FillInformation';
 import BookingStepper from '../stepper/BookingStepper';
+import BookingComplete from '../forms/BookingComplete';
 import DialogContent from '@mui/material/DialogContent';
+import { setbookingCompleted } from '../../utils/redux/reducers/UserSclice';
 import { setBookingDialogOpenOrClose } from '../../utils/redux/reducers/UiAttributeSlice';
-import { Square } from '@mui/icons-material';
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -56,52 +58,39 @@ BootstrapDialogTitle.propTypes = {
 
 function BookingDialogs() {
 
+  const { bookingActiveStep } = useSelector((state) => state.user)
   const { bookingDialogOpen } = useSelector((state) => state.uiAttribute)
 
   const dispatch = useDispatch()
+  const handleClose = () => {
+    dispatch(setBookingDialogOpenOrClose(false))
+    dispatch(setbookingCompleted())
+  }
 
   return (
     <BootstrapDialog
-      onClose={() => dispatch(setBookingDialogOpenOrClose(false))}
       aria-labelledby="customized-dialog-title"
       open={bookingDialogOpen}
-      maxWidth='xl'
+      maxWidth='lg'
     >
       <BootstrapDialogTitle
         id="customized-dialog-title"
-        onClose={() => dispatch(setBookingDialogOpenOrClose(false))}
+        onClose={handleClose}
       >
         Booking Seat
       </BootstrapDialogTitle>
       <DialogContent dividers>
-         <div className='flex'>
+        <div className='flex p-2'>
+          <div className='w-[26rem]'>
             <BookingCard/>
-            <Divider variant='middle'/>
-            <div>
-                <div className='flex justify-between items-center'>
-                    <div className='flex items-center'>
-                        <Square color='disabled'/>
-                        <Typography variant='body2'>Available</Typography>
-                    </div>
-                    <div className='flex items-center ml-5'>
-                        <Square color='error'/>
-                        <Typography variant='body2'>Booked</Typography>
-                    </div>
-                    <div className='flex items-center ml-5'>
-                        <Square color='primary'/>
-                        <Typography variant='body2'>Your choice</Typography>
-                    </div>
-                </div>
-                <Divider sx={{ my: 2 }}/>
-                <div className='flex justify-between items-center'>
-                    <Box sx={{ p: 1, border: '1px dashed grey', m:1 }}>b</Box>
-                    <Box sx={{ p: 1, border: '1px dashed grey', m:1 }}>c</Box>
-                    <Box sx={{ p: 1, border: '1px dashed grey', m:1 }}>a</Box>
-                    <Box sx={{ p: 1, border: '1px dashed grey', m:1 }}>d</Box>
-                    <Box sx={{ p: 1, border: '1px dashed grey', m:1 }}>e</Box>
-                </div>
-            </div>
-         </div>
+          </div>
+          <Divider orientation='vertical'/>
+          <div className='w-[26rem]'>
+            { bookingActiveStep == 0 && <ChooseSeat/> }
+            { bookingActiveStep == 1 && <FillInformatin/> }
+            { bookingActiveStep == 3 && <BookingComplete/> }
+          </div>
+        </div>
         <BookingStepper/>
       </DialogContent>
     </BootstrapDialog>
