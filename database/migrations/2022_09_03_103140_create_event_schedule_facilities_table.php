@@ -16,7 +16,7 @@ class CreateEventScheduleFacilitiesTable extends Migration
         Schema::create('event_schedule_facilities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_schedule_id')->constrained('event_schedules');
-            $table->foreignId('facilities_id')->constrained('facilities');
+            $table->foreignId('facility_id')->constrained('facilities');
             $table->timestamps();
         });
     }
