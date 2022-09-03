@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             EventSeeder::class,
             EventScheduleSeeder::class,
             FacilitySeeder::class,
-            EventScheduleFacilitySeeder::class
+            EventScheduleFacilitySeeder::class,
+            SeatSeeder::class
         ]);
     }
 }
