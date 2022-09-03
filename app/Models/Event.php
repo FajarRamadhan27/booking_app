@@ -20,7 +20,7 @@ class Event extends Model
     protected $fillable = ['id', 'title', 'images', 'description', 'type'];
 
     /**
-     * Get all of the post's comments.
+     * Get all of the schedules.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

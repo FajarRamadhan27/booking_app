@@ -17,12 +17,22 @@ class EventSchedule extends Model
     protected $fillable = ['id', 'event_id', 'start_dt', 'end_dt'];
 
     /**
-     * Get all event schedules.
+     * Get event.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    /**
+     * Get facility.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function facility()
+    {
+        return $this->hasOne(EventScheduleFacility::class);
     }
 }
