@@ -15,44 +15,19 @@ class EventScheduleSeeder extends Seeder
      */
     public function run()
     {
-        $eventShedules = [
-            0 => [
-                'id' => 1,
-                'event_id' => 1,
+        $index = 0;
+        $eventShedules = [];
+
+        do {
+            $eventShedules[$index] = [
+                'id' => $index+1,
+                'event_id' => $index+1,
                 'start_dt' => Carbon::now(),
                 'end_dt' => Carbon::now()
-            ],
-            1 => [
-                'id' => 2,
-                'event_id' => 2,
-                'start_dt' => Carbon::now(),
-                'end_dt' => Carbon::now()
-            ],
-            2 => [
-                'id' => 3,
-                'event_id' => 3,
-                'start_dt' => Carbon::now(),
-                'end_dt' => Carbon::now()
-            ],
-            3 => [
-                'id' => 4,
-                'event_id' => 4,
-                'start_dt' => Carbon::now(),
-                'end_dt' => Carbon::now()
-            ],
-            4 => [
-                'id' => 5,
-                'event_id' => 5,
-                'start_dt' => Carbon::now(),
-                'end_dt' => Carbon::now()
-            ],
-            5 => [
-                'id' => 6,
-                'event_id' => 6,
-                'start_dt' => Carbon::now(),
-                'end_dt' => Carbon::now()
-            ],
-        ];
+            ];
+
+            $index++;
+        } while ($index < 6);
 
         DB::table('event_schedules')->insert($eventShedules);
     }
