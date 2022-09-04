@@ -27,4 +27,14 @@ class Facility extends Model
     {
         return $this->hasOne(EventScheduleFacility::class);
     }
+
+    /**
+     * Get all facility seats.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seats()
+    {
+        return $this->hasMany(Seat::class);
+    }
 }
