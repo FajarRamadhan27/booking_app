@@ -9,7 +9,7 @@ function BookingComplete() {
     const { selectedEventSchedule } = useSelector((state) => state.eventSchedules)
 
     return (
-        <div className='p-5 flex flex-col justify-between items-center h-full'>
+        <div className='flex flex-col justify-between items-center h-full'>
             <Typography component="div" variant="h6" fontSize={16} align={"center"}>
                 {`${selectedEventSchedule.title}(Fajar Ramadhan : fajarramadhan220@gmail.com)`}
             </Typography>
