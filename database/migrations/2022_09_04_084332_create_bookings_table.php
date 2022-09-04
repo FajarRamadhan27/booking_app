@@ -15,6 +15,11 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('fullname', 100);
+            $table->string('title', 100);
+            $table->string('email', 100);
+            $table->string('notes', 200);
+            $table->foreignId('event_schedule_id')->constrained('event_schedules');
             $table->timestamps();
         });
     }
