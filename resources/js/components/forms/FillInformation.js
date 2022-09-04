@@ -11,7 +11,7 @@ function FillInformatin() {
     return (
         <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col">
-                <Grid container sx={{ mb: 1 }} justifyContent={ "center" }>
+                <Grid container sx={{ mb: 1 }} justifyContent={"center"}>
                     {
                         selectedSeats.map(seat => {
                             return <EventSeat seat={seat}/>

@@ -14,18 +14,16 @@ function BookingComplete() {
                 {`${selectedEventSchedule.title}(Fajar Ramadhan : fajarramadhan220@gmail.com)`}
             </Typography>
 
-            <div className='flex flex-col justify-center items-center'>
-                <Grid justifyContent={"center"} container sx={{ mt: 1 }}>
-                    {
-                        selectedSeats.map(seat => {
-                            return <EventSeat seat={seat}/>
-                        })
-                    }
-                </Grid>
-                <Typography variant='h6'>{'Total Price: $' + totalPurchases }</Typography>
-            </div>
+            <Grid justifyContent={"center"} container>
+                {
+                    selectedSeats.map(seat => {
+                        return <EventSeat seat={seat}/>
+                    })
+                }
+            </Grid>
 
             <div>
+                <Typography variant='h6' align='center'>{'Total Price: $' + totalPurchases }</Typography>
                 <div className="p-3 my-2 flex items-center justify-center">
                     <DoneAllIcon fontSize="large" color="success" sx={{ mr: 2 }}/>
                     <Typography component="div" variant="h6" align={"center"} color={'green'}>
