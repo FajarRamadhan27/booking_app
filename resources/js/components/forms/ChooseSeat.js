@@ -1,17 +1,19 @@
 import Loading from "../Loading"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import EventSeat from "../EventSeat"
 import { Square } from "@mui/icons-material"
 import { useDispatch, useSelector } from "react-redux"
 import { getSeats } from "../../utils/network/lib/Seat"
-import { Button, Grid, Typography } from "@mui/material"
+import { Alert, Button, Grid, Snackbar, Typography } from "@mui/material"
 import { forwardBookingStep, setEventSeats } from "../../utils/redux/reducers/UserSclice"
 
 function ChooseSeat() {
 
     const dispatch = useDispatch()
 
-    const { totalPurchases, eventSeats } = useSelector((state) => state.user)
+    const [isWarn, setWarnOpen] = useState(false)
+
+    const { totalPurchases, eventSeats, selectedSeats } = useSelector((state) => state.user)
     const { selectedEventSchedule } = useSelector((state) => state.eventSchedules)
 
     useEffect(() => {
@@ -19,6 +21,17 @@ function ChooseSeat() {
             dispatch(setEventSeats(res))
         })
     }, [])
+
+    const handleConfirm = () => {
+        switch(true) {
+            case (selectedSeats.length == 0):
+                setWarnOpen(true)
+                break
+            default:
+                dispatch(forwardBookingStep())
+            break
+        }
+    }
 
     if(!eventSeats) return <Loading open={eventSeats==null}/>
 
@@ -50,11 +63,22 @@ function ChooseSeat() {
                 <Button
                     color='success'
                     variant='contained'
-                    onClick={() => {dispatch(forwardBookingStep())}}
+                    onClick={handleConfirm}
                 >
                     CONFIRM
                 </Button>
             </div>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                open={isWarn}
+                onClose={() => setWarnOpen(false)}
+                key={'top-center'}
+            >
+                <Alert severity="error">Choose your seat first !</Alert>
+            </Snackbar>
         </div>
     )
 }
