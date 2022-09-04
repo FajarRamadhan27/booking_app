@@ -62,6 +62,7 @@ function BookingDialogs() {
   const { bookingDialogOpen } = useSelector((state) => state.uiAttribute)
 
   const dispatch = useDispatch()
+
   const handleClose = () => {
     dispatch(setBookingDialogOpenOrClose(false))
     dispatch(setbookingCompleted())

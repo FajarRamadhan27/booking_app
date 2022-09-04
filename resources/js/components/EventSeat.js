@@ -1,23 +1,30 @@
 import { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { Button, Grid } from "@mui/material"
-import { addPurchase, reducePurchase } from "../utils/redux/reducers/UserSclice"
+import { addPurchase, addSelectedSeat, reducePurchase, reduceSelectedSeat } from "../utils/redux/reducers/UserSclice"
 
-function EventSeat() {
+function EventSeat(props) {
 
     const dispatch = useDispatch()
-    const [seatColor, setSeatColor] = useState('inherit');
+
+    const [ isChoosed, chooseSeat ] = useState(false)
+    const { seat} = props
 
     const handleClick = () => {
-        switch(seatColor) {
-            case 'primary' :
-                setSeatColor('inherit')
-                dispatch(reducePurchase(100))
-                break;
-            case 'inherit':
-                setSeatColor('primary')
-                dispatch(addPurchase(100))
-                break;
+
+        if (['booked', 'personal-booking'].includes(seat.availability)) return
+
+        switch(isChoosed) {
+            case true :
+                chooseSeat(false)
+                dispatch(reducePurchase(parseInt(seat.price)))
+                dispatch(reduceSelectedSeat(seat.id))
+                break
+            case false :
+                chooseSeat(true)
+                dispatch(addPurchase(parseInt(seat.price)))
+                dispatch(addSelectedSeat({...seat, availability: 'personal-booking'}))
+                break
             default:
                 break;
         }
@@ -25,11 +32,20 @@ function EventSeat() {
 
     return (
         <Grid xs={2} padding={1}>
-            <Button variant='contained' color={seatColor} onClick={handleClick}>
-                C1
+            <Button
+                variant='contained'
+                color={
+                    seat.availability == 'booked' ?
+                        'error' : seat.availability == 'personal-booking' ?
+                            'info' : isChoosed ?
+                                'info' : 'inherit'
+                }
+                onClick={handleClick}
+            >
+                { seat.title }
             </Button>
         </Grid>
     )
 }
 
-export default EventSeat   
+export default EventSeat

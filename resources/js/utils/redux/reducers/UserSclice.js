@@ -5,7 +5,9 @@ export const userSlice = createSlice({
     initialState: {
         totalPurchases: 0,
         userSeat: {},
-        bookingActiveStep: 0
+        bookingActiveStep: 0,
+        eventSeats: null,
+        selectedSeats: []
     },
     reducers: {
         addPurchase: (state, value) => {
@@ -26,13 +28,24 @@ export const userSlice = createSlice({
         completeBookingStep: (state) => {
             state.bookingActiveStep = 3
         },
+        setEventSeats: (state, value) => {
+            state.eventSeats = value.payload
+        },
+        addSelectedSeat: (state, value) => {
+            state.selectedSeats.push(value.payload);
+        },
+        reduceSelectedSeat: (state, value) => {
+            state.selectedSeats = state.selectedSeats.filter(seat => seat.id != value.payload)
+        },
         setbookingCompleted: (state) => {
             state.totalPurchases = 0
             state.userSeat = {}
             state.bookingActiveStep = 0
+            state.eventSeats = null
+            state.selectedSeats = []
         }
-    }    
+    }
 })
 
-export const { addPurchase, reducePurchase, setbookingCompleted, forwardBookingStep, completeBookingStep } = userSlice.actions
+export const { addPurchase, reducePurchase, setbookingCompleted, forwardBookingStep, completeBookingStep, setEventSeats, addSelectedSeat, reduceSelectedSeat } = userSlice.actions
 export default userSlice.reducer

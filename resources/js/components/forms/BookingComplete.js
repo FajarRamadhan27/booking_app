@@ -5,7 +5,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 
 function BookingComplete() {
 
-    const { totalPurchases  } = useSelector((state) => state.user)
+    const { totalPurchases, selectedSeats  } = useSelector((state) => state.user)
     const { selectedEventSchedule } = useSelector((state) => state.eventSchedules)
 
     return (
@@ -15,8 +15,8 @@ function BookingComplete() {
             </Typography>
             <Grid justifyContent={"center"} container sx={{ mt: 1 }}>
                 {
-                    [1,2,3].map(idx => {
-                        return <EventSeat/>
+                    selectedSeats.map(seat => {
+                        return <EventSeat seat={seat}/>
                     })
                 }
             </Grid>

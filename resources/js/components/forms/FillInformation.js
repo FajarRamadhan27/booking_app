@@ -4,35 +4,35 @@ import { Button, Grid, TextareaAutosize, TextField, Typography } from "@mui/mate
 import { completeBookingStep } from "../../utils/redux/reducers/UserSclice"
 
 function FillInformatin() {
-    
+
     const dispatch = useDispatch()
-    const { totalPurchases  } = useSelector((state) => state.user)
+    const { totalPurchases, selectedSeats  } = useSelector((state) => state.user)
 
     return (
         <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col">
                 <Grid container sx={{ mb: 1 }} justifyContent={ "center" }>
                     {
-                        [1,2,3].map(idx => {
-                            return <EventSeat/>
+                        selectedSeats.map(seat => {
+                            return <EventSeat seat={seat}/>
                         })
                     }
                 </Grid>
-                <TextField 
-                    id="name" 
-                    label="Name" 
-                    variant="standard" 
+                <TextField
+                    id="name"
+                    label="Name"
+                    variant="standard"
                     fullWidth
-                    inputProps={{style: { fontSize: 14 }}} 
+                    inputProps={{style: { fontSize: 14 }}}
                     InputLabelProps={{style: { fontSize: 14 }}}
                 />
-                <TextField 
-                    id="email" 
-                    label="Email" 
-                    variant="standard" 
+                <TextField
+                    id="email"
+                    label="Email"
+                    variant="standard"
                     fullWidth
-                    inputProps={{style: { fontSize: 14 }}} 
-                    InputLabelProps={{style: { fontSize: 14 }}} 
+                    inputProps={{style: { fontSize: 14 }}}
+                    InputLabelProps={{style: { fontSize: 14 }}}
                     sx={{ my: 1 }}
                 />
                 <TextareaAutosize
@@ -44,13 +44,13 @@ function FillInformatin() {
             </div>
             <div className="flex justify-between items-center w-full ml-3">
                 <Typography variant='h6'>{'Total Price: $' + totalPurchases }</Typography>
-                <Button 
-                    color='success' 
+                <Button
+                    color='success'
                     variant='contained'
                     onClick={() => {dispatch(completeBookingStep())}}
                 >
                     SAVE
-                </Button>   
+                </Button>
             </div>
         </div>
     )
