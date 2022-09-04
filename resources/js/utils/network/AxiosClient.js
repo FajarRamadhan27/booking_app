@@ -1,5 +1,9 @@
 import axios from "axios";
 
+export const HTTP_OK = 200
+export const HTTP_CREATED = 201
+export const HTTP_UNPROCESSABLE_ENTITY = 422
+
 const axiosClient = axios.create({
     baseURL: `http://booking_app.test/api/`,
     headers: {
@@ -14,8 +18,7 @@ axiosClient.interceptors.response.use(
     },
     function (error) {
         const { response } = error
-        console.log("There is request error"+ response.status)
-        return Promise.reject(error)
+        return response
     }
 )
 
