@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventScheduleController;
 use App\Http\Controllers\SeatController;
 use Illuminate\Http\Request;
@@ -22,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('seats', SeatController::class);
 Route::get('event-schedules', EventScheduleController::class);
+
+Route::post('book-seats', BookingController::class);
