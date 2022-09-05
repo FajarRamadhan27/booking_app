@@ -1,9 +1,10 @@
 import EventSeat from "../EventSeat"
 import { useDispatch, useSelector } from "react-redux"
 import { bookSeats } from "../../utils/network/lib/Seat"
-import { completeBookingStep } from "../../utils/redux/reducers/UserSclice"
+import { completeBookingStep, setBookingResult } from "../../utils/redux/reducers/UserSclice"
 import { setValidationErrors } from "../../utils/redux/reducers/UiAttributeSlice"
 import { HTTP_UNPROCESSABLE_ENTITY, HTTP_OK } from "../../utils/network/AxiosClient"
+import { setEventSeats } from "../../utils/redux/reducers/UserSclice"
 import { Alert, Box, Button, Grid, TextareaAutosize, TextField, Typography } from "@mui/material"
 
 function FillInformatin() {
@@ -31,8 +32,10 @@ function FillInformatin() {
             (res) => {
                 switch(res.status) {
                     case HTTP_OK:
-                        dispatch(completeBookingStep())
+                        dispatch(setBookingResult(res.data.data))
+                        dispatch(setEventSeats(res.data.data.seats))
                         dispatch(setValidationErrors({}))
+                        dispatch(completeBookingStep())
                         break
                     case HTTP_UNPROCESSABLE_ENTITY:
                         dispatch(setValidationErrors(res.data.errors))

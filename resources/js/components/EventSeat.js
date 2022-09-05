@@ -8,7 +8,7 @@ function EventSeat(props) {
     const dispatch = useDispatch()
 
     const [ isChoosed, chooseSeat ] = useState(false)
-    const { seat} = props
+    const { seat } = props
 
     const handleClick = () => {
 

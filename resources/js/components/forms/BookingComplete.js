@@ -5,13 +5,13 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 
 function BookingComplete() {
 
-    const { totalPurchases, selectedSeats  } = useSelector((state) => state.user)
-    const { selectedEventSchedule } = useSelector((state) => state.eventSchedules)
+    const { selectedSeats, bookingResult } = useSelector((state) => state.user)
+
 
     return (
         <div className='flex flex-col justify-between items-center h-full'>
             <Typography component="div" variant="h6" fontSize={16} align={"center"}>
-                {`${selectedEventSchedule.title}(Fajar Ramadhan : fajarramadhan220@gmail.com)`}
+                { bookingResult.title }
             </Typography>
 
             <Grid justifyContent={"center"} container>
@@ -23,7 +23,7 @@ function BookingComplete() {
             </Grid>
 
             <div>
-                <Typography variant='h6' align='center'>{'Total Price: $' + totalPurchases }</Typography>
+                <Typography variant='h6' align='center'>{'Total Price: $' + bookingResult.total_purchase }</Typography>
                 <div className="p-3 my-2 flex items-center justify-center">
                     <DoneAllIcon fontSize="large" color="success" sx={{ mr: 2 }}/>
                     <Typography component="div" variant="h6" align={"center"} color={'green'}>
@@ -31,7 +31,7 @@ function BookingComplete() {
                     </Typography>
                 </div>
                 <Typography component="div" variant="body2"align={"center"}>
-                    {`Note: - `}
+                    {`Note: ${ bookingResult.notes } `}
                 </Typography>
             </div>
         </div>
