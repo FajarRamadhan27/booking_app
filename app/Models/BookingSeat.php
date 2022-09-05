@@ -25,4 +25,14 @@ class BookingSeat extends Model
     {
         return $this->belongsTo(Booking::class);
     }
+
+    /**
+     * Get event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seat()
+    {
+        return $this->belongsTo(Seat::class);
+    }
 }

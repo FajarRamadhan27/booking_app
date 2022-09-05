@@ -19,7 +19,8 @@ class SeatResource extends JsonResource
             'title' => $this->title,
             'price' => $this->price,
             'facility_id' => $this->facility_id,
-            'availability' => 'available'
+            'availability' => optional($this->bookingSeat)->id ?
+                'booked' : 'available'
         ];
     }
 }

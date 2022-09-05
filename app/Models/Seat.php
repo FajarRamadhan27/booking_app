@@ -18,4 +18,15 @@ class Seat extends Model
     {
         return $this->belongsTo(Facility::class, 'facility_id');
     }
+
+
+    /**
+     * Get facility.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function bookingSeat()
+    {
+        return $this->hasOne(BookingSeat::class);
+    }
 }
