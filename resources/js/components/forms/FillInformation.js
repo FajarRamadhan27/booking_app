@@ -12,6 +12,7 @@ function FillInformatin() {
 
     const { totalPurchases, selectedSeats  } = useSelector((state) => state.user)
     const { validationErrors } = useSelector(state => state.uiAttribute)
+    const { selectedEventSchedule } = useSelector((state) => state.eventSchedules)
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -23,8 +24,10 @@ function FillInformatin() {
         let notes = data.get('notes')
         let seat_ids = selectedSeats.map(seat => seat.id)
         let total_purchase = totalPurchases
+        let event_schedule_id = selectedEventSchedule.id
+        let event_name = selectedEventSchedule.title
 
-        bookSeats({ name, email, notes, seat_ids, total_purchase },
+        bookSeats({ name, email, notes, seat_ids, total_purchase, event_schedule_id, event_name },
             (res) => {
                 switch(res.status) {
                     case HTTP_OK:
