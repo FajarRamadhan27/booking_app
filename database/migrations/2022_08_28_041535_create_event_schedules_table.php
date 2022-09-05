@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookingsTable extends Migration
+class CreateEventSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('event_schedules', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('event_id')->constrained('events');
+            $table->dateTime('start_dt');
+            $table->dateTime('end_dt');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('event_schedules');
     }
 }

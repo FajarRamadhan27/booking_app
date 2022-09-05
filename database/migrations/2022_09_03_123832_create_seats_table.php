@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateSeatsTable extends Migration
 {
@@ -15,6 +15,9 @@ class CreateSeatsTable extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 10);
+            $table->foreignId('facility_id')->constrained('facilities');
+            $table->decimal('price');
             $table->timestamps();
         });
     }
