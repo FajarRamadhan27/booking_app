@@ -2,6 +2,7 @@
 
 namespace App\Helper;
 
+use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 
 class BookingService {
@@ -45,6 +46,6 @@ class BookingService {
             $booking->bookingSeats()->create(['seat_id' => $seat]);
         }
 
-        return ['status' => true, 'messages' => 'Seat booked.', 'data' => $booking];
+        return ['status' => true, 'data' => new BookingResource($booking)];
     }
 }
