@@ -29,6 +29,7 @@ class BookingRequest extends FormRequest
             'email' => ['required', 'email', 'indisposable'],
             'notes' => ['max:200', new BadWord],
             'event_schedule_id' => ['required', 'integer'],
+            'event_name' => ['required'],
             'total_purchase' => ['required', 'integer'],
             'seat_ids' => ['required'],
             'seat_ids.*' => ['integer']
