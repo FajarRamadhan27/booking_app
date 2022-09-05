@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/images/booking-app.png">
+  <img src="https://raw.githubusercontent.com/FajarRamadhan27/booking_app/main/public/images/booking-app.png">
 </p>
 
 # Booking App Demo
